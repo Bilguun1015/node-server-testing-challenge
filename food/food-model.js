@@ -18,7 +18,7 @@ async function update(id, changes) {
 }
 
 function remove(id) {
-  return null;
+  return db('food').where({id}).del()
 }
 
 function getAll() {

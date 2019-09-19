@@ -29,7 +29,16 @@ describe('food model', () => {
         });
     });
 
-    desribe('delete', () => {
-        
-    })
+    describe('delete', () => {
+        it('should delete food from the db', async () => {
+            const [id1] = await Food.insert({name: 'Tsuivan'});
+            const [id2] = await Food.insert({name: 'Buuz'});
+            
+            const deleteID = await Food.remove(id1)
+            let food = await db('food');
+            expect(food).toHaveLength(1)
+            expect(food[0].name).toBe('Buuz')
+            expect(deleteID).toBe(id1)
+        });
+    });
 });
